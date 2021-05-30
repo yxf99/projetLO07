@@ -4,38 +4,74 @@
 <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="router1.php?action=CaveAccueil">YANG Xufang</a>
+      <a class="navbar-brand" href="router1.php?action=CaveAccueil">YANG Xufang & Zhang Shiyuan</a>
     </div>
     <ul class="nav navbar-nav">
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" 
-           aria-haspopup="true" aria-expanded="false">VIN <span class="caret"></span></a>
+           aria-haspopup="true" aria-expanded="false">Gestion des vaccins<span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="router1.php?action=vinReadAll">Liste des vins</a></li>
-          <li><a href="router1.php?action=vinReadId">Sélection d'un vin par son id</a></li>
-          <li><a href="router1.php?action=vinCreate">Insertion d'un vin</a></li>                       
+          <li><a href="router1.php?action=vinReadAll">Liste des vaccins</a></li>
+          <li><a href="router1.php?action=vinReadId">Ajout d'un vaccin</a></li>
+          <li><a href="router1.php?action=vinCreate">Mise à jour d'un vaccin</a></li>                       
         </ul>
       </li>   
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" 
-           aria-haspopup="true" aria-expanded="false">PRODUCTEUR <span class="caret"></span></a>
+           aria-haspopup="true" aria-expanded="false">Gestion des centres <span class="caret"></span></a>
         <ul class="dropdown-menu">            
-          <li><a href="router1.php?action=producteurReadAll">Liste des producteurs</a></li>
-          <li><a href="router1.php?action=producteurReadId">Sélection d'un producteur par son id</a></li>
-          <li><a href="router1.php?action=producteurCreate">Insertion d'un producteur</a></li>
-          <li><a href="router1.php?action=producteurReadRegion">Liste sans doublon des régions</a></li>
-          <li><a href="router1.php?action=producteurCountRegion">Nombre de producteurs par région</a></li>  
+          <li><a href="router1.php?action=producteurReadAll">Ajout d'un centre</a></li>
+          <li><a href="router1.php?action=producteurReadId">Liste des centres</a></li>
         </ul>
       </li>
       
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" 
-           aria-haspopup="true" aria-expanded="false">DOCUMENTATION<span class="caret"></span></a>
+           aria-haspopup="true" aria-expanded="false">Gestion des patients<span class="caret"></span></a>
         <ul class="dropdown-menu">            
-          <li><a href="router1.php?action=mesPropositions">Proposition d'améloration</a></li>
+          <li><a href="router1.php?action=producteurReadAll">Ajout d'un patient</a></li>
+          <li><a href="router1.php?action=producteurReadId">Liste des patients</a></li>
         </ul>
-      </li>         
+      </li>    
+      
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" 
+           aria-haspopup="true" aria-expanded="false">Gestion des stocks<span class="caret"></span></a>
+        <ul class="dropdown-menu">            
+          <li><a href="router1.php?action=producteurReadAll">Liste des centres avec le nombre de doses de chaque vaccin</a></li>
+          <li><a href="router1.php?action=producteurReadId">Nombre global de doses des centres</a></li>
+          <li><a href="router1.php?action=producteurReadId">Attribution de vaccins pour un centre</a></li>      
     </ul>
+      </li>
+      
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" 
+           aria-haspopup="true" aria-expanded="false">Gestion des rendez-vous<span class="caret"></span></a>
+        <ul class="dropdown-menu">            
+          <li><a href="router1.php?action=producteurReadAll">Dossier de vaccination d'un patient</a></li>
+        </ul>
+      </li> 
+      
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" 
+           aria-haspopup="true" aria-expanded="false">Mes innovations<span class="caret"></span></a>
+        <ul class="dropdown-menu">            
+          <li><a href="router1.php?action=producteurReadAll">1</a></li>
+          <li><a href="router1.php?action=producteurReadId">2</a></li>
+          <li><a href="router1.php?action=producteurReadId">3</a></li>      
+    </ul>
+      </li>
+      
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" 
+           aria-haspopup="true" aria-expanded="false">Documentation<span class="caret"></span></a>
+        <ul class="dropdown-menu">            
+          <li><a href="router1.php?action=producteurReadAll">Documentation innovation 1</a></li>
+          <li><a href="router1.php?action=producteurReadId">Documentation innovation 2</a></li>
+          <li><a href="router1.php?action=producteurReadId">Documentation innovation 3</a></li>   
+          <li><a href="router1.php?action=producteurReadId">Votre point de vue global sur ce projet</a></li> 
+        </ul>
+      </li>
   </div>
 </nav>
 
