@@ -50,7 +50,7 @@ class ControllerVaccin {
  public static function vaccinCreated() {
   // ajouter une validation des informations du formulaire
   $results = ModelVaccin::insert(
-      htmlspecialchars($_GET['id']), htmlspecialchars($_GET['label']), htmlspecialchars($_GET['doses'])
+      htmlspecialchars($_GET['label']), htmlspecialchars($_GET['doses'])
   );
   // ----- Construction chemin de la vue
   include 'config.php';
