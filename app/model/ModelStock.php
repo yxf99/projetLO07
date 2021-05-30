@@ -136,6 +136,22 @@ class ModelStock {
   return null;
  }
 
+ 
+ public static function sommeStock() {
+  try {
+   $database = Model::getInstance();
+   $query = "SELECT label, sum(quantite) as num FROM "
+           . "(SELECT id as centre_id FROM centre UNION SELECT centre_id FROM stock) "
+           . "GROUP BY centre_id;";
+   $statement = $database->prepare($query);
+   $statement->execute(); 
+   $results = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
+   return $results;
+  } catch (PDOException $e) {
+   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+   return NULL;
+  }
+ }
 }
 ?>
 <!-- ----- fin Modelstock -->

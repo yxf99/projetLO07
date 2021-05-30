@@ -3,7 +3,7 @@
 <?php
 require_once '../model/ModelStock.php';
 
-class Controllerstock {
+class ControllerStock {
  // --- Liste des Vaccin
  public static function stockReadAll() {
   $results = ModelStock::getAll();
@@ -54,6 +54,14 @@ class Controllerstock {
   // ----- Construction chemin de la vue
   include 'config.php';
   $vue = $root . '/app/view/stock/viewInserted.php';
+  require ($vue);
+ }
+ 
+ public static function stockGlobal() {
+  $results = ModelStock::sommeStock();
+  // ----- Construction chemin de la vue
+  include 'config.php';
+  $vue = $root . '/app/view/stock/viewGlobal.php';
   require ($vue);
  }
  

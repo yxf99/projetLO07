@@ -51,7 +51,8 @@ switch ($action) {
  case "stockReadId" :
  case "stockCreate" :
  case "stockCreated" :
-     Controllerstock::$action();
+ case "stockGlobal";
+     ControllerStock::$action();
   break;
 
 // case "producteurReadAll" :
