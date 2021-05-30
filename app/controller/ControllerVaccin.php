@@ -58,6 +58,7 @@ class ControllerVaccin {
  }
  
  public static function vaccinMiseAJour() {
+     $results = ModelVaccin::getAllId();
   // ----- Construction chemin de la vue
   include 'config.php';
   $vue = $root . '/app/view/vaccin/viewMiseAJour.php';
@@ -66,7 +67,7 @@ class ControllerVaccin {
  
  public static function vaccinMiseAJoured() {
   $results = ModelVaccin::update(
-      htmlspecialchars($_GET['doses'])
+     htmlspecialchars($_GET['id']), htmlspecialchars($_GET['doses'])
   );
   // ----- Construction chemin de la vue
   include 'config.php';

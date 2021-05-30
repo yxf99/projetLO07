@@ -127,8 +127,19 @@ class ModelVaccin {
  }
 
  public static function update($doses, $id) {
-  $query = "update ";
-  return null;
+     try {
+   $database = Model::getInstance();
+   $query = "update vaccin set doses = :doses where id = :id";
+   $statement = $database->prepare($query);
+   $statement->execute([
+     'id' => $id,
+     'doses' => $doses
+   ]);
+   return $id;
+  } catch (PDOException $e) {
+   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+   return NULL;
+  }
  }
 
  public static function delete() {
