@@ -2,6 +2,7 @@
 <!-- ----- debut Router -->
 <?php
 require ('../controller/ControllerVaccin.php');
+require ('../controller/ControllerCentre.php');
 require ('../controller/ControllerProducteur.php');
 require ('../controller/ControllerVaccination.php');
 
@@ -25,23 +26,23 @@ switch ($action) {
      ControllerVaccin::$action();
   break;
 
-// case "centreReadAll" :
-// case "centreReadOne" :
-// case "centreReadId" :
-// case "centreCreate" :
-// case "centreCreated" :
-//     ControllerCentre::$action();
-//  break;
-
- case "producteurReadAll" :
- case "producteurReadOne" :
- case "producteurReadId" :
- case "producteurCreate" :
- case "producteurCreated" :
- case "producteurReadRegion" :
- case "producteurCountRegion" :
-     ControllerProducteur::$action();
+ case "centreReadAll" :
+ case "centreReadOne" :
+ case "centreReadId" :
+ case "centreCreate" :
+ case "centreCreated" :
+     ControllerCentre::$action();
   break;
+
+// case "producteurReadAll" :
+// case "producteurReadOne" :
+// case "producteurReadId" :
+// case "producteurCreate" :
+// case "producteurCreated" :
+// case "producteurReadRegion" :
+// case "producteurCountRegion" :
+//     ControllerProducteur::$action();
+//  break;
 
 case "mesPropositions" :
      ControllerVaccionation::$action();
@@ -49,7 +50,7 @@ case "mesPropositions" :
  // Tache par défaut
  default:
   $action = "vaccinAccueil";
-  ControllerVaccin::$action();
+  ControllerVaccination::$action();
 }
 ?>
 <!-- ----- Fin Router -->
