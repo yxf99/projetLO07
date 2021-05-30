@@ -1,12 +1,12 @@
 <?php
 
-class ControllerCave{
+class ControllerVaccination{
     // --- page d'acceuil
- public static function caveAccueil() {
+ public static function vaccinAccueil() {
   include 'config.php';
-  $vue = $root . '/app/view/viewCaveAccueil.php';
+  $vue = $root . '/app/view/viewVaccinAccueil.php';
   if (DEBUG)
-   echo ("ControllerVin : caveAccueil : vue = $vue");
+   echo ("ControllerVaccin : vaccinAccueil : vue = $vue");
   require ($vue);
  }
  
