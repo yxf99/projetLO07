@@ -126,7 +126,7 @@ class ModelVaccin {
   }
  }
 
- public static function update($doses, $id) {
+ public static function update($id, $doses) {
      try {
    $database = Model::getInstance();
    $query = "update vaccin set doses = :doses where id = :id";

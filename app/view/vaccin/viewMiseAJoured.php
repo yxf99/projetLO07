@@ -16,8 +16,7 @@ require ($root . '/app/view/fragment/fragmentVaccinHeader.html');
      echo ("<h3>Le nouveau vaccin a été mis à jour </h3>");
      echo("<ul>");
      echo ("<li>id = " . $results . "</li>");
-     echo ("<li>label = " . $_GET['label'] . "</li>");
-     echo ("<li>label = " . $_GET['doses'] . "</li>");
+     echo ("<li>doses = " . $_GET['doses'] . "</li>");
      echo("</ul>");
     } else {
      echo ("<h3>Problème d'insertion du Vaccin</h3>");
