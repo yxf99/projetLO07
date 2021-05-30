@@ -14,8 +14,8 @@ require ($root . '/app/view/fragment/fragmentVaccinHeader.html');
 
     <form role="form" method='get' action='router.php'>
       <div class="form-group">
-        <input type="hidden" name='action' value='vinCreated'>                               
-        <label for="id">label : </label><input type="text" name='label' value='vaccinUTT'>
+        <input type="hidden" name='action' value='vaccinCreated'>                               
+        <label for="id">label : </label><input type="text" name='label' size='75' value='vaccinUTT'>
         <label for="id">doses : </label><input type="number" step='any' name='doses' value='2'>                
       </div>
       <p/>
