@@ -8,11 +8,12 @@ class ModelPatient {
  private $id, $nom, $prenom, $adresse;
 
  // pas possible d'avoir 2 constructeurs
- public function __construct($id = NULL, $nom = NULL, $adresse = NULL) {
+ public function __construct($id = NULL, $nom = NULL, $prenom = NULL, $adresse = NULL) {
   // valeurs nulles si pas de passage de parametres
   if (!is_null($id)) {
    $this->id = $id;
    $this->nom = $nom;
+   $this->prenom = $prenom;
    $this->adresse = $adresse;
   }
  }

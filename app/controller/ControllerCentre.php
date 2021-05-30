@@ -49,7 +49,7 @@ class ControllerCentre {
  public static function centreCreated() {
   // ajouter une validation des informations du formulaire
   $results = ModelCentre::insert(
-      htmlspecialchars($_GET['id']), htmlspecialchars($_GET['label']), htmlspecialchars($_GET['adresse'])
+       htmlspecialchars($_GET['label']), htmlspecialchars($_GET['adresse'])
   );
   // ----- Construction chemin de la vue
   include 'config.php';
