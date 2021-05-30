@@ -25,6 +25,14 @@ switch ($action) {
      ControllerVaccin::$action();
   break;
 
+// case "centreReadAll" :
+// case "centreReadOne" :
+// case "centreReadId" :
+// case "centreCreate" :
+// case "centreCreated" :
+//     ControllerCentre::$action();
+//  break;
+
  case "producteurReadAll" :
  case "producteurReadOne" :
  case "producteurReadId" :

@@ -1,20 +1,20 @@
  
-<!-- ----- debut de la page cave_acceuil -->
-<?php include 'fragment/fragmentCaveHeader.html'; ?>
+<!-- ----- debut de la page vaccin_acceuil -->
+<?php include 'fragment/fragmentVaccinHeader.html'; ?>
 <body>
   <div class="container">
     <?php
-    include 'fragment/fragmentCaveMenu.html';
-    include 'fragment/fragmentCaveJumbotron.html';
+    include 'fragment/fragmentVaccinMenu.html';
+    include 'fragment/fragmentVaccinJumbotron.html';
     ?>
   </div>   
   
   
   <?php
-  include 'fragment/fragmentCaveFooter.html';
+  include 'fragment/fragmentVaccinFooter.html';
   ?>
 
-  <!-- ----- fin de la page cave_acceuil -->
+  <!-- ----- fin de la page vaccin_acceuil -->
 
 </body>
 </html>
