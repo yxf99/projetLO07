@@ -1,5 +1,5 @@
 
-<!-- ----- debut Router1 -->
+<!-- ----- debut Router -->
 <?php
 require ('../controller/ControllerVaccin.php');
 require ('../controller/ControllerProducteur.php');
@@ -44,5 +44,5 @@ case "mesPropositions" :
   ControllerVaccin::$action();
 }
 ?>
-<!-- ----- Fin Router1 -->
+<!-- ----- Fin Router -->
 
