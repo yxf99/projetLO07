@@ -24,6 +24,8 @@ switch ($action) {
  case "vaccinReadId" :
  case "vaccinCreate" :
  case "vaccinCreated" :
+ case "vaccinMiseAJour";
+ case "vaccinMiseAJoured";
      ControllerVaccin::$action();
   break;
 

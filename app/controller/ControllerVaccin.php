@@ -1,4 +1,3 @@
-
 <!-- ----- debut ControllerVaccin -->
 <?php
 require_once '../model/ModelVaccin.php';
@@ -58,6 +57,22 @@ class ControllerVaccin {
   require ($vue);
  }
  
+ public static function vaccinMiseAJour() {
+  // ----- Construction chemin de la vue
+  include 'config.php';
+  $vue = $root . '/app/view/vaccin/viewMiseAJour.php';
+  require ($vue);
+ }
+ 
+ public static function vaccinMiseAJoured() {
+  $results = ModelVaccin::update(
+      htmlspecialchars($_GET['doses'])
+  );
+  // ----- Construction chemin de la vue
+  include 'config.php';
+  $vue = $root . '/app/view/vaccin/viewMiseAJoured.php';
+  require ($vue);
+ }
 }
 ?>
 <!-- ----- fin ControllerVaccin -->

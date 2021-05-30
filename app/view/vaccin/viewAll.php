@@ -1,4 +1,3 @@
-
 <!-- ----- début viewAll -->
 <?php
 

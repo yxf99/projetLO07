@@ -126,8 +126,8 @@ class ModelVaccin {
   }
  }
 
- public static function update() {
-  echo ("ModelVaccin : update() TODO ....");
+ public static function update($doses, $id) {
+  $query = "update ";
   return null;
  }
 

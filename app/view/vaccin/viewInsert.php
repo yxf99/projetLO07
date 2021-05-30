@@ -16,7 +16,7 @@ require ($root . '/app/view/fragment/fragmentVaccinHeader.html');
       <div class="form-group">
         <input type="hidden" name='action' value='vaccinCreated'>                               
         <label for="id">label : </label><input type="text" name='label' size='75' value='vaccinUTT'>
-        <label for="id">doses : </label><input type="text" step='any' name='doses' value='2'>                
+        <label for="id">doses : </label><input type="number" step='any' name='doses' value='2'>                
       </div>
       <p/>
       <button class="btn btn-primary" type="submit">Go</button>
