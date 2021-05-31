@@ -1,4 +1,3 @@
-
 <!-- ----- debut Modelstock -->
 
 <?php
@@ -14,6 +13,7 @@ class ModelStock {
    $this->centre_id = $centre_id;
    $this->vaccin_id = $vaccin_id;
    $this->quantite = $quantite;
+
   }
  }
 
@@ -29,6 +29,8 @@ class ModelStock {
   $this->quantite = $quantite;
  }
 
+
+ 
  function getCentre_id() {
   return $this->centre_id;
  }
@@ -40,6 +42,8 @@ class ModelStock {
  function getQuantite() {
   return $this->quantite;
  }
+ 
+ 
  
  
 // retourne une liste des centre_id
@@ -135,17 +139,45 @@ class ModelStock {
   echo ("ModelStock : delete() TODO ....");
   return null;
  }
-
  
+}
+
+class ModelStockGlobal {
+ private $label, $global;
+
+ // pas possible d'avoir 2 constructeurs
+ public function __construct($label = NULL, $global = NULL) {
+  // valeurs nulles si pas de passage de parametres
+     
+  if (!is_null($label)) {
+   $this->label = $label;
+   $this->global = $global;
+  }
+ }
+ function setLable ($label) {
+  $this->label = $label;
+ }
+
+ function setGlobal($global) {
+  $this->global = $global;
+ }
+
+ function getLabel() {
+  return $this->label;
+ }
+
+ function getGlobal() {
+  return $this->global;
+ }
+ 
+
  public static function sommeStock() {
   try {
    $database = Model::getInstance();
-   $query = "SELECT label, sum(quantite) as num FROM "
-           . "(SELECT id as centre_id FROM centre UNION SELECT centre_id FROM stock) "
-           . "GROUP BY centre_id;";
+   $query = "SELECT centre.label, SUM(quantite) FROM stock,centre WHERE stock.centre_id = centre.id GROUP BY centre_id ORDER BY SUM(quantite) DESC;";
    $statement = $database->prepare($query);
    $statement->execute(); 
-   $results = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
+   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelStockGlobal");
    return $results;
   } catch (PDOException $e) {
    printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
@@ -153,5 +185,7 @@ class ModelStock {
   }
  }
 }
+
 ?>
+
 <!-- ----- fin Modelstock -->

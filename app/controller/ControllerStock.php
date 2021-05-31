@@ -1,4 +1,3 @@
-
 <!-- ----- debut ControllerVaccin -->
 <?php
 require_once '../model/ModelStock.php';
@@ -14,7 +13,7 @@ class ControllerStock {
    echo ("ControllerStock : stockReadAll : vue = $vue");
   require ($vue);
  }
-
+ 
  // Affiche un formulaire pour sélectionner un id qui existe
  public static function stockReadId() {
   $results = ModelStock::getAllId();
@@ -58,7 +57,7 @@ class ControllerStock {
  }
  
  public static function stockGlobal() {
-  $results = ModelStock::sommeStock();
+  $results = ModelStockGlobal::sommeStock();
   // ----- Construction chemin de la vue
   include 'config.php';
   $vue = $root . '/app/view/stock/viewGlobal.php';
