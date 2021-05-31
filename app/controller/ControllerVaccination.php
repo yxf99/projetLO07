@@ -10,9 +10,27 @@ class ControllerVaccination{
   require ($vue);
  }
  
- public static function mesPropositions() {
+ public static function documentationInnovationl() {
      include 'config.php';
-     $vue = $root . '/public/documentation/mesPropositions.php';
+     $vue = $root . '/public/documentation/documentationInnovation1.php';
+     require ($vue);
+ }
+ 
+ public static function documentationInnovation2() {
+     include 'config.php';
+     $vue = $root . '/public/documentation/documentationInnovation2.php';
+     require ($vue);
+ }
+ 
+ public static function documentationInnovation3() {
+     include 'config.php';
+     $vue = $root . '/public/documentation/documentationInnovation3.php';
+     require ($vue);
+ }
+ 
+ public static function vueGlobal() {
+     include 'config.php';
+     $vue = $root . '/public/documentation/vueGlobal.php';
      require ($vue);
  }
 }

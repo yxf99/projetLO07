@@ -65,8 +65,11 @@ switch ($action) {
 //     ControllerProducteur::$action();
 //  break;
 
-case "mesPropositions" :
-     ControllerVaccionation::$action();
+case "documentationInnovationl" :
+case "documentationInnovation2" :
+case "documentationInnovation3" :
+case "vueGlobal" :
+  ControllerVaccination::$action();
   break;
  // Tache par défaut
  default:
