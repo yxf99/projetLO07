@@ -14,17 +14,20 @@ require ($root . '/app/view/fragment/fragmentVaccinHeader.html');
 
     <?php
     if ($results) {
-     echo ("<h3>Le nouveau vaccin a été mis à jour </h3>");
+     echo ("<h3>Le nouveau stock a été mis à jour </h3>");
      echo("<ul>");
      echo ("<li>centre_id = " . $results . "</li>");
-     echo ("<li>doses = " . $_GET['quantite'] . "</li>");
+     echo ("<li>quantite = " . $_GET['quantite'] . "</li>");
      echo("</ul>");
     } else {
      echo ("<h3>Problème d'insertion du Vaccin</h3>");
-     echo ("id = " . $_GET['centre_id'].$_GET['vaccin_id']);
+     echo ("id = " . $_GET['centre_label'].$_GET['vaccin_label']);
     }
 
-    echo("</div>");?>
+    echo("</div>");
+//    echo $centreId;
+//    echo $vaccinId;
+    ?>
   <?php include $root . '/app/view/fragment/fragmentVaccinFooter.html'; ?>
 
   <!-- ----- fin miseAJour -->

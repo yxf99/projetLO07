@@ -14,8 +14,8 @@ require ($root . '/app/view/fragment/fragmentVaccinHeader.html');
     <form role="form" method='get' action='router.php'>
       <div class="form-group">       
         <input type="hidden" name='action' value='stockAttribued'>
-        <label for="label">centre : </label> 
-        <select class="form-control" id='centre_id' name='centre_id' style="width: 200px">
+        <label for="centre_label">centre : </label> 
+        <select class="form-control" id='centre_label' name='centre_label' style="width: 200px">
             <?php
             foreach ($results as $label) {
              echo ("<option>$label</option>");
@@ -23,10 +23,10 @@ require ($root . '/app/view/fragment/fragmentVaccinHeader.html');
             ?>
         </select>
          <label for="vaccin_label">vaccin : </label> 
-        <select class="form-control" id='vaccin_label' name='vaccin_id' style="width: 200px">
+        <select class="form-control" id='vaccin_label' name='vaccin_label' style="width: 200px">
             <?php
-            foreach ($results1 as $id1) {
-             echo ("<option>$id1</option>");
+            foreach ($results1 as $label1) {
+             echo ("<option>$label1</option>");
             }
             ?>
         </select>

@@ -129,18 +129,48 @@ class ModelStock {
 //   return -1;
 //  }
 // }
-
-public static function update($centre_id, $vaccin_id, $quantite) {
+public static function getCentreID($centre_label) {
      try {
    $database = Model::getInstance();
-   $query = "update stock set quantite= :quantite  where vaccin_id = :vaccin_id, centre_id= :centre_id";
+   $query = "select id from centre where label = :label";
+   $statement = $database->prepare($query);
+   $statement->execute([      
+    'label' => $centre_label
+   ]);
+   $results = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
+   return $results[0];
+  } catch (PDOException $e) {
+   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+   return NULL;
+  }
+ }
+ public static function getVaccinID($vaccin_label) {
+     try {
+   $database = Model::getInstance();
+   $query = "select id from vaccin where label = :label ";
    $statement = $database->prepare($query);
    $statement->execute([
-     'vaccin_id' => $vaccin_id,
-     'centre_id' => $centre_id,
+    'label' => $vaccin_label
+   ]);
+   $results = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
+   return $results[0];
+  } catch (PDOException $e) {
+   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+   return NULL;
+  }
+ }
+ 
+public static function update($centreId, $vaccinId, $quantite) {
+     try {
+   $database = Model::getInstance();
+   $query = "update stock set quantite= :quantite where vaccin_id = :vaccin_id and centre_id= :centre_id";
+   $statement = $database->prepare($query);
+   $statement->execute([
+     'vaccin_id' => $vaccinId,
+     'centre_id' => $centreId,
      'quantite' => $quantite
    ]);
-   return array();
+   return $centreId;
   } catch (PDOException $e) {
    printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
    return NULL;
