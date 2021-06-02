@@ -12,7 +12,7 @@ require ($root . '/app/view/fragment/fragmentVaccinHeader.html');
     ?> 
 
     <form role="form" method='get' action='router.php'>
-      <div class="form-group">       
+      <div class="form-group">
         <input type="hidden" name='action' value='vaccinMiseAJoured'>
         <label for="id">id : </label> 
         <select class="form-control" id='id' name='id' style="width: 100px">

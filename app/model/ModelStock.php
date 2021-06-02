@@ -46,33 +46,33 @@ class ModelStock {
  
  
  
-// retourne une liste des centre_id
- public static function getAllId() {
-  try {
-   $database = Model::getInstance();
-   $query = "select centre_id from stock";
-   $statement = $database->prepare($query);
-   $statement->execute();
-   $results = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
-   return $results;
-  } catch (PDOException $e) {
-   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-   return NULL;
-  }
- }
-
- public static function getMany($query) {
-  try {
-   $database = Model::getInstance();
-   $statement = $database->prepare($query);
-   $statement->execute();
-   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelStock");
-   return $results;
-  } catch (PDOException $e) {
-   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-   return NULL;
-  }
- }
+//// retourne une liste des centre_id
+// public static function getAllId() {
+//  try {
+//   $database = Model::getInstance();
+//   $query = "select centre_id from stock";
+//   $statement = $database->prepare($query);
+//   $statement->execute();
+//   $results = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
+//   return $results;
+//  } catch (PDOException $e) {
+//   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+//   return NULL;
+//  }
+// }
+//
+// public static function getMany($query) {
+//  try {
+//   $database = Model::getInstance();
+//   $statement = $database->prepare($query);
+//   $statement->execute();
+//   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelStock");
+//   return $results;
+//  } catch (PDOException $e) {
+//   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+//   return NULL;
+//  }
+// }
 
  public static function getAll() {
   try {
@@ -104,42 +104,49 @@ class ModelStock {
   }
  }
 
- public static function insert($vaccin_id, $quantite) {
-  try {
+// public static function insert($vaccin_id, $quantite) {
+//  try {
+//   $database = Model::getInstance();
+//
+//   // recherche de la valeur de la clé = max(centre_id) + 1
+//   $query = "select max(centre_id) from stock";
+//   $statement = $database->query($query);
+//   $tuple = $statement->fetch();
+//   $centre_id = $tuple['0'];
+//   $centre_id++;
+//
+//   // ajout d'un nouveau tuple;
+//   $query = "insert into stock value (:centre_id, :vaccin_id, :quantite)";
+//   $statement = $database->prepare($query);
+//   $statement->execute([
+//     'centre_id' => $centre_id,
+//     'vaccin_id' => $vaccin_id,
+//     'quantite' => $quantite
+//   ]);
+//   return $centre_id;
+//  } catch (PDOException $e) {
+//   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+//   return -1;
+//  }
+// }
+
+public static function update($centre_id, $vaccin_id, $quantite) {
+     try {
    $database = Model::getInstance();
-
-   // recherche de la valeur de la clé = max(centre_id) + 1
-   $query = "select max(centre_id) from stock";
-   $statement = $database->query($query);
-   $tuple = $statement->fetch();
-   $centre_id = $tuple['0'];
-   $centre_id++;
-
-   // ajout d'un nouveau tuple;
-   $query = "insert into stock value (:centre_id, :vaccin_id, :quantite)";
+   $query = "update stock set quantite= :quantite  where vaccin_id = :vaccin_id, centre_id= :centre_id";
    $statement = $database->prepare($query);
    $statement->execute([
-     'centre_id' => $centre_id,
      'vaccin_id' => $vaccin_id,
+     'centre_id' => $centre_id,
      'quantite' => $quantite
    ]);
-   return $centre_id;
+   return array();
   } catch (PDOException $e) {
    printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-   return -1;
+   return NULL;
   }
  }
 
- public static function update() {
-  echo ("ModelStock : update() TODO ....");
-  return null;
- }
-
- public static function delete() {
-  echo ("ModelStock : delete() TODO ....");
-  return null;
- }
- 
 }
 
 class ModelStockGlobal {
@@ -168,13 +175,12 @@ class ModelStockGlobal {
 
  function getGlobal() {
   return $this->global;
- }
- 
+ } 
 
  public static function sommeStock() {
   try {
    $database = Model::getInstance();
-   $query = "SELECT centre.label, SUM(quantite) FROM stock,centre WHERE stock.centre_id = centre.id GROUP BY centre_id ORDER BY SUM(quantite) DESC;";
+   $query = "SELECT centre.label, SUM(quantite) as global FROM centre,stock WHERE stock.centre_id = centre.id GROUP BY label ORDER BY SUM(quantite) DESC;";
    $statement = $database->prepare($query);
    $statement->execute(); 
    $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelStockGlobal");
@@ -186,6 +192,89 @@ class ModelStockGlobal {
  }
 }
 
+
+class ModelStockAttribu {
+ private $id, $label;
+
+ // pas possible d'avoir 2 constructeurs
+ public function __construct($id = NULL, $label = NULL) {
+  // valeurs nulles si pas de passage de parametres
+  if (!is_null($id)) {
+   $this->id = $id;
+   $this->label = $label;
+  }
+ }
+
+ function setId($id) {
+  $this->id = $id;
+ }
+
+ function setLable($label) {
+  $this->label = $label;
+ }
+
+
+
+
+ function getId() {
+  return $this->id;
+ }
+
+ function getLabel() {
+  return $this->label;
+ }
+ 
+ 
+// retourne une liste des centre_id
+ 
+ public static function getAllIdcentre() {
+  try {
+   $database = Model::getInstance();
+   $query = "select id,label from centre";
+   $statement = $database->prepare($query);
+   $statement->execute();
+   $results = $statement->fetchAll(PDO::FETCH_COLUMN, 1);
+   return $results;
+  } catch (PDOException $e) {
+   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+   return NULL;
+  }
+ }
+ 
+ 
+public static function getAllIdvaccin() {
+  try {
+   $database = Model::getInstance();
+   $query = "select id,label from vaccin";
+   $statement = $database->prepare($query);
+   $statement->execute();
+   $results = $statement->fetchAll(PDO::FETCH_COLUMN, 1);
+   return $results;
+  } catch (PDOException $e) {
+   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+   return NULL;
+  }
+ }
+ 
+ 
+ public static function getOne($centre_id) {
+  try {
+   $database = Model::getInstance();
+   $query = "select * from stock where centre_id = :centre_id";
+   $statement = $database->prepare($query);
+   $statement->execute([
+     'centre_id' => $centre_id
+   ]);
+   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelStock");
+   return $results;
+  } catch (PDOException $e) {
+   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+   return NULL;
+  }
+ }
+
+
+}
 ?>
 
 <!-- ----- fin Modelstock -->

@@ -5,7 +5,6 @@ require ('../controller/ControllerVaccin.php');
 require ('../controller/ControllerCentre.php');
 require ('../controller/ControllerPatient.php');
 require ('../controller/ControllerStock.php');
-require ('../controller/ControllerProducteur.php');
 require ('../controller/ControllerVaccination.php');
 
 // --- récupération de l'action passée dans l'URL
@@ -46,11 +45,11 @@ switch ($action) {
      ControllerPatient::$action();
   break;
 
- case "stockReadAll" :
+case "stockReadAll" :
  case "stockReadOne" :
  case "stockReadId" :
- case "stockCreate" :
- case "stockCreated" :
+ case "stockAttribu" :
+ case "stockAttribued" :
  case "stockGlobal";
      ControllerStock::$action();
   break;

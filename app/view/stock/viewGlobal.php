@@ -20,7 +20,7 @@ require($root . '/app/view/fragment/fragmentVaccinHeader.html');
         </thead>
         <tbody>
         <?php
-        // La liste des producteurs est dans une variable $results
+       
         foreach ($results as $element) {
             printf("<tr><td>%s</td><td>%d</td></tr>",
                 $element->getLabel(),

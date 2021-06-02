@@ -36,23 +36,22 @@ class ControllerStock {
  }
 
  // Affiche le formulaire de creation d'un vaccin
- public static function stockCreate() {
+  public static function stockAttribu() {
+     $results = ModelStockAttribu::getAllIdcentre();
+     $results1= ModelStockAttribu::getAllIdvaccin();
   // ----- Construction chemin de la vue
   include 'config.php';
-  $vue = $root . '/app/view/stock/viewInsert.php';
+  $vue = $root . '/app/view/stock/viewAttribution.php';
   require ($vue);
  }
-
- // Affiche un formulaire pour récupérer les informations d'un nouveau Vaccin.
- // La clé est gérée par le systeme et pas par l'internaute
- public static function stockCreated() {
-  // ajouter une validation des informations du formulaire
-  $results = ModelStock::insert(
-       htmlspecialchars($_GET['label']), htmlspecialchars($_GET['adresse'])
+ 
+ public static function stockAttribued() {
+  $results = ModelStock::update(
+     htmlspecialchars($_GET['centre_id']), htmlspecialchars($_GET['vaccin_id']),htmlspecialchars($_GET['quantite'])
   );
   // ----- Construction chemin de la vue
   include 'config.php';
-  $vue = $root . '/app/view/stock/viewInserted.php';
+  $vue = $root . '/app/view/stock/viewAttributioned.php';
   require ($vue);
  }
  
