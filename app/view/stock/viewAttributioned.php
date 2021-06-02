@@ -17,16 +17,14 @@ require ($root . '/app/view/fragment/fragmentVaccinHeader.html');
      echo ("<h3>Le nouveau stock a été mis à jour </h3>");
      echo("<ul>");
      echo ("<li>centre_id = " . $results . "</li>");
-     echo ("<li>quantite = " . $_GET['quantite'] . "</li>");
+     echo ("<li>quantité ajoutée = " . $_GET['quantite'] . "</li>");
      echo("</ul>");
     } else {
      echo ("<h3>Problème d'insertion du Vaccin</h3>");
      echo ("id = " . $_GET['centre_label'].$_GET['vaccin_label']);
     }
-
     echo("</div>");
-//    echo $centreId;
-//    echo $vaccinId;
+    
     ?>
   <?php include $root . '/app/view/fragment/fragmentVaccinFooter.html'; ?>
 

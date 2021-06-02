@@ -16,10 +16,15 @@ class ControllerPatient {
  }
 
  // Affiche un formulaire pour sélectionner un id qui existe
- public static function patientReadId() {
-  $results = ModelPatient::getAllId();
-
-  // ----- Construction chemin de la vue
+ public static function patientReadId($args) {
+  if (DEBUG) {
+            echo 'ControllerPatient:patientReadId:begin</br>';
+        }
+        $results = ModelPatient::getAllId();
+        $target = $args['target'];
+        if (DEBUG) {
+            echo ("ControllerPatient：patientReadId : target = $target</br>");
+        }
   include 'config.php';
   $vue = $root . '/app/view/patient/viewId.php';
   require ($vue);
@@ -57,6 +62,17 @@ class ControllerPatient {
   require ($vue);
  }
  
+  public static function patientDeleted()
+    {
+        $patient_id = $_GET['id'];
+        // Supprime la valeur
+        $results = ModelPatient::delete($patient_id);
+        // ----- Construction chemin de la vue
+        include 'config.php';
+        $vue = $root . '/app/view/patient/viewDeleted.php';
+        require($vue);
+
+    }
 }
 ?>
 <!-- ----- fin ControllerVaccin -->

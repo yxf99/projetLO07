@@ -28,8 +28,6 @@ class ModelStock {
  function setQuantite($quantite) {
   $this->quantite = $quantite;
  }
-
-
  
  function getCentre_id() {
   return $this->centre_id;
@@ -43,36 +41,6 @@ class ModelStock {
   return $this->quantite;
  }
  
- 
- 
- 
-//// retourne une liste des centre_id
-// public static function getAllId() {
-//  try {
-//   $database = Model::getInstance();
-//   $query = "select centre_id from stock";
-//   $statement = $database->prepare($query);
-//   $statement->execute();
-//   $results = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
-//   return $results;
-//  } catch (PDOException $e) {
-//   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-//   return NULL;
-//  }
-// }
-//
-// public static function getMany($query) {
-//  try {
-//   $database = Model::getInstance();
-//   $statement = $database->prepare($query);
-//   $statement->execute();
-//   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelStock");
-//   return $results;
-//  } catch (PDOException $e) {
-//   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-//   return NULL;
-//  }
-// }
 
  public static function getAll() {
   try {
@@ -104,31 +72,6 @@ class ModelStock {
   }
  }
 
-// public static function insert($vaccin_id, $quantite) {
-//  try {
-//   $database = Model::getInstance();
-//
-//   // recherche de la valeur de la clé = max(centre_id) + 1
-//   $query = "select max(centre_id) from stock";
-//   $statement = $database->query($query);
-//   $tuple = $statement->fetch();
-//   $centre_id = $tuple['0'];
-//   $centre_id++;
-//
-//   // ajout d'un nouveau tuple;
-//   $query = "insert into stock value (:centre_id, :vaccin_id, :quantite)";
-//   $statement = $database->prepare($query);
-//   $statement->execute([
-//     'centre_id' => $centre_id,
-//     'vaccin_id' => $vaccin_id,
-//     'quantite' => $quantite
-//   ]);
-//   return $centre_id;
-//  } catch (PDOException $e) {
-//   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-//   return -1;
-//  }
-// }
 public static function getCentreID($centre_label) {
      try {
    $database = Model::getInstance();
@@ -172,7 +115,7 @@ public static function update($centreId, $vaccinId, $quantite) {
             if ($testExistence->rowCount() == 0) {
                 return null;
             } else {
-        $query = "update stock set quantite= :quantite where vaccin_id = :vaccin_id and centre_id= :centre_id";
+        $query = "update stock set quantite = quantite + :quantite where vaccin_id = :vaccin_id and centre_id= :centre_id";
         $statement = $database->prepare($query);
         $statement->execute([
           'vaccin_id' => $vaccinId,
@@ -185,7 +128,6 @@ public static function update($centreId, $vaccinId, $quantite) {
    return NULL;
   }
  }
-
 }
 
 class ModelStockGlobal {
@@ -231,7 +173,6 @@ class ModelStockGlobal {
  }
 }
 
-
 class ModelStockAttribu {
  private $id, $label;
 
@@ -252,9 +193,6 @@ class ModelStockAttribu {
   $this->label = $label;
  }
 
-
-
-
  function getId() {
   return $this->id;
  }
@@ -262,7 +200,6 @@ class ModelStockAttribu {
  function getLabel() {
   return $this->label;
  }
- 
  
 // retourne une liste des centre_id
  
@@ -280,7 +217,6 @@ class ModelStockAttribu {
   }
  }
  
- 
 public static function getAllIdvaccin() {
   try {
    $database = Model::getInstance();
@@ -294,7 +230,6 @@ public static function getAllIdvaccin() {
    return NULL;
   }
  }
- 
  
  public static function getOne($centre_id) {
   try {
@@ -311,7 +246,6 @@ public static function getAllIdvaccin() {
    return NULL;
   }
  }
-
 
 }
 ?>
