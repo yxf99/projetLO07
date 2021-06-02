@@ -162,15 +162,24 @@ public static function getCentreID($centre_label) {
  
 public static function update($centreId, $vaccinId, $quantite) {
      try {
-   $database = Model::getInstance();
-   $query = "update stock set quantite= :quantite where vaccin_id = :vaccin_id and centre_id= :centre_id";
-   $statement = $database->prepare($query);
-   $statement->execute([
-     'vaccin_id' => $vaccinId,
-     'centre_id' => $centreId,
-     'quantite' => $quantite
-   ]);
-   return $centreId;
+        $database = Model::getInstance();
+        $query = "select * from stock where vaccin_id = :vaccin_id and centre_id= :centre_id";
+        $testExistence = $database->prepare($query);
+            $testExistence->execute([
+                'vaccin_id' => $vaccinId,
+                'centre_id' => $centreId,
+            ]);
+            if ($testExistence->rowCount() == 0) {
+                return null;
+            } else {
+        $query = "update stock set quantite= :quantite where vaccin_id = :vaccin_id and centre_id= :centre_id";
+        $statement = $database->prepare($query);
+        $statement->execute([
+          'vaccin_id' => $vaccinId,
+          'centre_id' => $centreId,
+          'quantite' => $quantite
+        ]);
+            return $centreId;}
   } catch (PDOException $e) {
    printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
    return NULL;
