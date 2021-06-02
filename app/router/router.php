@@ -50,6 +50,8 @@ switch ($action) {
  case "patientCreate" :
  case "patientCreated" :
  case "patientDeleted":
+ case "patientAdresseMiseAJour";
+ case "patientAdresseMiseAJoured";
      ControllerPatient::$action($args);
   break;
 

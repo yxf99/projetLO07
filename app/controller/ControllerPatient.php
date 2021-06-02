@@ -73,6 +73,24 @@ class ControllerPatient {
         require($vue);
 
     }
+    
+     public static function patientAdresseMiseAJour() {
+     $results = ModelPatient::getAllId();
+  // ----- Construction chemin de la vue
+  include 'config.php';
+  $vue = $root . '/app/view/patient/viewMiseAJour.php';
+  require ($vue);
+ }
+ 
+ public static function patientAdresseMiseAJoured() {
+  $results = ModelPatient::update(
+     htmlspecialchars($_GET['id']), htmlspecialchars($_GET['adresse'])
+  );
+  // ----- Construction chemin de la vue
+  include 'config.php';
+  $vue = $root . '/app/view/patient/viewMiseAJoured.php';
+  require ($vue);
+ }
 }
 ?>
 <!-- ----- fin ControllerVaccin -->

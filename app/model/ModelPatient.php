@@ -136,9 +136,20 @@ class ModelPatient {
   }
  }
 
- public static function update() {
-  echo ("ModelPatient : update() TODO ....");
-  return null;
+ public static function update($id,$adresse) {
+   try {
+   $database = Model::getInstance();
+   $query = "update patient set adresse = :adresse where id = :id";
+   $statement = $database->prepare($query);
+   $statement->execute([
+     'id' => $id,
+     'adresse' => $adresse
+   ]);
+   return $id;
+  } catch (PDOException $e) {
+   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+   return NULL;
+  }
  }
 
  public static function delete($id)
