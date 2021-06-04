@@ -68,7 +68,9 @@ case "rdvReadId";
 case "rdvSelect" :
 case "rdvSelected" :
 case "rdvDistribution":
-case "rdvVaccin":
+case "rdvVaccin0":
+case "rdvVaccin1":
+case "rdvVaccin2":
      ControllerRdv::$action();
   break;
 

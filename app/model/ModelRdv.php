@@ -101,16 +101,36 @@ class ModelRdv {
    ]);
    $results = $statement->fetchAll(PDO::FETCH_ASSOC);
    
+   //nombre maximum du vaccin 
+   $query1 = "select doses from vaccin, rendezvous where vaccin.id = rendezvous.vaccin_id and rendezvous.patient_id = :patient_id";
+   $statement1 = $database->prepare($query1);
+   $statement1->execute([
+     'patient_id' => $patient_id
+   ]);
+   $dosesMax = $statement->fetchAll(PDO::FETCH_ASSOC);
+   
    if($results[0]['injection'] == 0){
-        $query = "select distinct label from centre, stock where centre.id = stock.centre_id and quantite > 0  ";
+        $query = "select distinct id, label from centre, stock where centre.id = stock.centre_id and quantite > 0  ";
         $statement = $database->prepare($query);
         $statement->execute();
-        $centrePossible = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return array($centrePossible,$patient_id);
-   } elseif ($results[0]['injection'] == 1) {
-       
-   } else {
-       
+        $centrePossible0 = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return array($centrePossible0,$patient_id,0);
+   } elseif ($results[0]['injection'] == $dosesMax) {
+        $query = "select id, label, doses, centre_id, injection from vaccin, rendezvous where vaccin.id = rendezvous.vaccin_id and rendezvous.patient_id = :patient_id";
+        $statement = $database->prepare($query);
+        $statement->execute([
+            'patient_id' => $patient_id
+          ]);
+        $listeFinale = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return array($listeFinale,2);
+   } else {// pas suffit
+        $query = "select distinct id, label from centre, rendezvous, stock where centre.id = stock.centre_id and rendezvous.vaccin_id = stock.vaccin_id and rendezvous.patient_id = :patient_id and quantite > 0  ";
+        $statement = $database->prepare($query);
+        $statement->execute([
+            'patient_id' => $patient_id
+          ]);
+        $centrePossible1 = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return array($centrePossible1,$patient_id,1);
    }
   
   } catch (PDOException $e) {
@@ -121,23 +141,52 @@ class ModelRdv {
  
  public static function distribution0($centreChoisi,$patient_id) {
      try {
-        $database = Model::getInstance();
-        
+        $database = Model::getInstance();        
         //select la quantite max dans ce centre choisi
         $query = "select distinct max(quantite) from stock where centre_id = :centre_id  ";
         $statement = $database->prepare($query);
         $statement->execute([
             'centre_id' => $centreChoisi
           ]);
-        $quantiteMax = $statement->fetchAll(PDO::FETCH_ASSOC);
-        
+        $quantiteMax = $statement->fetchAll(PDO::FETCH_ASSOC);       
         //select le label du vaccin ayant la quantite max(vue)
         $query2 = "select distinct id, label from vaccin, stock where vaccin.id = stock.vaccin_id and quantite= :quantite  ";
         $statement2 = $database->prepare($query2);
         $statement2->execute([
             'quantite' => $quantiteMax[0]['quantite']
           ]);
-        $vaccin = $statement2->fetchAll(PDO::FETCH_ASSOC);
+        $vaccin = $statement2->fetchAll(PDO::FETCH_ASSOC);    
+        //mettre à jour le vaccin
+        $query3 = "update stock set quantite= quantite-1 where centre_id = :centre_id and vaccin_id = :vaccin_id ";
+        $statement3 = $database->prepare($query3);
+        $statement3->execute([
+            'centre_id' => $centreChoisi,
+            'vaccin_id'=> $vaccin[0]['id']
+          ]);  
+        //mettre à jour le patient
+        $query4 = "update rendezvous set injection= injection+1 where patient_id = :patient_id ";
+        $statement4 = $database->prepare($query4);
+        $statement4->execute([
+            'patient_id' => $patient_id,
+          ]);
+        return $vaccin;
+  } catch (PDOException $e) {
+   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+   return NULL;
+  }
+ }
+ 
+ public static function distribution1($centreChoisi,$patient_id) {
+     try {
+        $database = Model::getInstance();
+        
+        //select le vaccin déjà injecté 
+        $query = "select vaccin_id from rendezvous where patient_id = :patient_id  ";
+        $statement = $database->prepare($query);
+        $statement->execute([
+            'patient_id' => $patient_id
+          ]);
+        $vaccin = $statement->fetchAll(PDO::FETCH_ASSOC);
         
         //mettre à jour le vaccin
         $query3 = "update stock set quantite= quantite-1 where centre_id = :centre_id and vaccin_id = :vaccin_id ";
