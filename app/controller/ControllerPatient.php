@@ -16,17 +16,10 @@ class ControllerPatient {
  }
 
  // Affiche un formulaire pour sélectionner un id qui existe
- public static function patientReadId($args) {
-  if (DEBUG) {
-            echo 'ControllerPatient:patientReadId:begin</br>';
-        }
+ public static function patientReadId() {
         $results = ModelPatient::getAllId();
-        $target = $args['target'];
-        if (DEBUG) {
-            echo ("ControllerPatient：patientReadId : target = $target</br>");
-        }
   include 'config.php';
-  $vue = $root . '/app/view/patient/viewId.php';
+  $vue = $root . '/app/view/patient/viewId1.php';
   require ($vue);
  }
 

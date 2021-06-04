@@ -18,11 +18,11 @@ parse_str($query_string, $param);
 // --- $action contient le nom de la méthode statique recherchée
 $action = htmlspecialchars($param["action"]);
 
-// --- Modification du routeur pour prendre en compt l'ensemble des parametres
-$action = $param['action'];
-
-// --- On supprime l'élément action de la structure
-$args = $param;
+//// --- Modification du routeur pour prendre en compt l'ensemble des parametres
+//$action = $param['action'];
+//
+//// --- On supprime l'élément action de la structure
+//$args = $param;
 
 // --- Liste des méthodes autorisées
 switch ($action) {
@@ -52,7 +52,7 @@ switch ($action) {
  case "patientDeleted":
  case "patientAdresseMiseAJour";
  case "patientAdresseMiseAJoured";
-     ControllerPatient::$action($args);
+     ControllerPatient::$action();
   break;
 
  case "stockReadAll" :
