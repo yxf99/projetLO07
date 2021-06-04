@@ -67,6 +67,8 @@ switch ($action) {
 case "rdvReadId";
 case "rdvSelect" :
 case "rdvSelected" :
+case "rdvDistribution":
+case "rdvVaccin":
      ControllerRdv::$action();
   break;
 

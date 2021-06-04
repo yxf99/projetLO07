@@ -11,6 +11,7 @@ require ($root . '/app/view/fragment/fragmentVaccinHeader.html');
     include $root . '/app/view/fragment/fragmentVaccinJumbotron.html';
     ?>
     <!-- ===================================================== -->
+        <form role="form" method='get' value='rdvDistribution' action='router.php'>
      <table class = "table table-striped table-bordered">
       <thead>
         <tr>
@@ -30,6 +31,9 @@ require ($root . '/app/view/fragment/fragmentVaccinHeader.html');
           ?>
       </tbody>
     </table>
+             <p/>
+      <button class="btn btn-primary" type="submit">Go Vaccin</button>
+    </form>
     <?php
     include $root . '/app/view/fragment/fragmentVaccinFooter.html';
     ?>

@@ -54,6 +54,24 @@ class ControllerRdv {
   require ($vue);
  }
  
+ public static function rdvDistribution() {
+  $patient_id = $_GET['patient_id'];
+  $results = ModelRdv::distributionVaccin($patient_id);
+  // ----- Construction chemin de la vue
+  include 'config.php';
+  $vue = $root . '/app/view/centre/viewId.php';
+  require ($vue);
+ }
+
+  public static function rdvVaccin() {
+  $centre_id = $_GET['centre_id'];
+  $patient_id = $_GET['patient_id'];
+  $results = ModelRdv::distribution0($centre_id,$patient_id);
+  // ----- Construction chemin de la vue
+  include 'config.php';
+  $vue = $root . '/app/view/rdv/viewDistribution0.php';
+  require ($vue);
+ }
 }
 ?>
 <!-- ----- fin ControllerVaccin -->

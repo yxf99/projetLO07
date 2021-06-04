@@ -15,10 +15,11 @@ require ($root . '/app/view/fragment/fragmentVaccinHeader.html');
 
     <form role="form" method='get' action='router.php'>
       <div class="form-group">
-        <input type="hidden" name='action' value='centreReadOne'>
-        <label for="id">id : </label> <select class="form-control" id='id' name='id' style="width: 100px">
+        <input type="hidden" name='action' value='rdvVaccin'>
+        <label for="patient_id">patient_id : <?php$results[1]['patient_id']?></label> <select class="form-control" id='patient_id' name='patient_id' style="width: 100px">
+        <label for="centre_id">centre_id : </label> <select class="form-control" id='centre_id' name='centre_id' style="width: 100px">
             <?php
-            foreach ($results as $id) {
+            foreach ($results[0]['id'] as $id) {
              echo ("<option>$id</option>");
             }
             ?>
