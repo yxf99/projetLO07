@@ -41,15 +41,16 @@ class ControllerRdv {
   $results = ModelRdv::getPatientInfo();
   // ----- Construction chemin de la vue
   include 'config.php';
-  $vue = $root . '/app/view/rdv/viewSelect.php';
+  $vue = $root . '/app/view/patient/viewId.php';
   require ($vue);
  }
  
   public static function rdvSelected() {
-  $results = ModelRdv::getPatientInfo();
+  $patient_id = $_GET['patient_id'];
+  $results = ModelRdv::getOne($patient_id);
   // ----- Construction chemin de la vue
   include 'config.php';
-  $vue = $root . '/app/view/patient/viewId.php';
+  $vue = $root . '/app/view/rdv/viewSelected.php';
   require ($vue);
  }
  

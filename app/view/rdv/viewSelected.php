@@ -11,21 +11,26 @@ require ($root . '/app/view/fragment/fragmentVaccinHeader.html');
     include $root . '/app/view/fragment/fragmentVaccinJumbotron.html';
     ?>
     <!-- ===================================================== -->
+     <table class = "table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th scope = "col">centre_id</th>
+          <th scope = "col">patient_id</th>
+          <th scope = "col">injection</th>
+          <th scope = "col">vaccin_id</th>
+        </tr>
+      </thead>
+      <tbody>
+          <?php
+          // La liste des centres est dans une variable $results             
+          foreach ($results as $element) {
+           printf("<tr><td>%d</td><td>%d</td><td>%d</td><td>%d</td></tr>", $element->getCentre_id(), 
+             $element->getPatient_id(), $element->getInjection(), $element->getVaccin_id());
+          }
+          ?>
+      </tbody>
+    </table>
     <?php
-    if ($results) {
-     echo ("<h3>Le nouveau centre a été ajouté </h3>");
-     echo("<ul>");
-     echo ("<li>id = " . $results . "</li>");
-     echo ("<li>label = " . $_GET['label'] . "</li>");
-     echo ("<li>adresse = " . $_GET['adresse'] . "</li>");
-     echo("</ul>");
-    } else {
-     echo ("<h3>Problème d'insertion du Centre</h3>");
-     echo ("label = " . $_GET['label']);
-    }
-
-    echo("</div>");
-    
     include $root . '/app/view/fragment/fragmentVaccinFooter.html';
     ?>
     <!-- ----- fin viewInserted -->    

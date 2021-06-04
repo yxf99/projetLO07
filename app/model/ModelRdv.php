@@ -50,10 +50,10 @@ class ModelRdv {
  public static function getAll() {
   try {
    $database = Model::getInstance();
-   $query = "select * from stock";
+   $query = "select * from rendezvous";
    $statement = $database->prepare($query);
    $statement->execute();
-   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelStock");
+   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelRdv");
    return $results;
   } catch (PDOException $e) {
    printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
@@ -61,15 +61,15 @@ class ModelRdv {
   }
  }
 
- public static function getOne($centre_id) {
+ public static function getOne($patient_id) {
   try {
    $database = Model::getInstance();
-   $query = "select * from stock where centre_id = :centre_id";
+   $query = "select * from rendezvous where patient_id = :patient_id";
    $statement = $database->prepare($query);
    $statement->execute([
-     'centre_id' => $centre_id
+     'patient_id' => $patient_id
    ]);
-   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelStock");
+   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelRdv");
    return $results;
   } catch (PDOException $e) {
    printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
@@ -77,21 +77,6 @@ class ModelRdv {
   }
  }
 
-//public static function getCentreID($centre_label) {
-//     try {
-//   $database = Model::getInstance();
-//   $query = "select id from centre where label = :label";
-//   $statement = $database->prepare($query);
-//   $statement->execute([      
-//    'label' => $centre_label
-//   ]);
-//   $results = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
-//   return $results[0];
-//  } catch (PDOException $e) {
-//   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-//   return NULL;
-//  }
-// }
  public static function getPatientInfo() {
      try {
    $database = Model::getInstance();
@@ -105,6 +90,7 @@ class ModelRdv {
    return NULL;
   }
  }
+ 
  
 public static function update($centreId, $patientId, $injection, $vaccin_id) {
      try {
