@@ -21,7 +21,10 @@ require ($root . '/app/view/fragment/fragmentVaccinHeader.html');
           On a bien réfléchier de créer les nouvelles classes et de modifier les requêtes sql(somme,update,delete...) aussi créer des nouveaux méthodes
           afin de faciliter notre processus.
       </p>
-      <p>On a confronté beaucoup de difficultés en binôme et on a travaillé ensemble depuis toujours. Ce projet nous permet de reconnaître le système de php et de collaboration avec gitHub. Bien qu'on ait encore des difficultés, mais on a bien avancé.
+      <p>A propos d'amélioration, je pense qu'il est mieux d'insérer les bouton d'ajouter ou supprimer dans la page de la liste pour 
+          en faveur des utilisateurs sans besoins de chercher les entrées dans la barre.
+      </p>
+      <p>On a confronté beaucoup de difficultés en binôme et on a travaillé ensemble depuis toujours. Ce projet nous permet de reconnaître le système de php et de collaborer avec gitHub. Bien qu'on ait encore des difficultés, mais on a bien avancé.
       </p>
   <?php include $root . '/app/view/fragment/fragmentVaccinFooter.html'; ?>
 

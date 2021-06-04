@@ -37,7 +37,21 @@ class ControllerRdv {
   require ($vue);
  }
 
+ public static function rdvSelect() {
+  $results = ModelRdv::getPatientInfo();
+  // ----- Construction chemin de la vue
+  include 'config.php';
+  $vue = $root . '/app/view/rdv/viewSelect.php';
+  require ($vue);
+ }
  
+  public static function rdvSelected() {
+  $results = ModelRdv::getPatientInfo();
+  // ----- Construction chemin de la vue
+  include 'config.php';
+  $vue = $root . '/app/view/patient/viewId.php';
+  require ($vue);
+ }
  
 }
 ?>

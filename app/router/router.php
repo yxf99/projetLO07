@@ -66,6 +66,7 @@ switch ($action) {
 
 case "rdvReadId";
 case "rdvSelect" :
+case "rdvSelected" :
      ControllerRdv::$action();
   break;
 

@@ -77,31 +77,29 @@ class ModelRdv {
   }
  }
 
-public static function getCentreID($centre_label) {
+//public static function getCentreID($centre_label) {
+//     try {
+//   $database = Model::getInstance();
+//   $query = "select id from centre where label = :label";
+//   $statement = $database->prepare($query);
+//   $statement->execute([      
+//    'label' => $centre_label
+//   ]);
+//   $results = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
+//   return $results[0];
+//  } catch (PDOException $e) {
+//   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
+//   return NULL;
+//  }
+// }
+ public static function getPatientInfo() {
      try {
    $database = Model::getInstance();
-   $query = "select id from centre where label = :label";
+   $query = "select id, nom, prenom from patient ";
    $statement = $database->prepare($query);
-   $statement->execute([      
-    'label' => $centre_label
-   ]);
-   $results = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
-   return $results[0];
-  } catch (PDOException $e) {
-   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-   return NULL;
-  }
- }
- public static function getPatientID($patient_label) {
-     try {
-   $database = Model::getInstance();
-   $query = "select id from patient where label = :label ";
-   $statement = $database->prepare($query);
-   $statement->execute([
-    'label' => $patient_label
-   ]);
-   $results = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
-   return $results[0];
+   $statement->execute();
+   $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+   return $results;
   } catch (PDOException $e) {
    printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
    return NULL;
