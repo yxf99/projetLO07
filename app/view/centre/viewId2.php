@@ -14,7 +14,7 @@ require ($root . '/app/view/fragment/fragmentVaccinHeader.html');
       //patient_id
       echo $results[1];
       // $results contient un tableau avec la liste des clés.
-      echo "Vous avez terminé l'injection";
+      echo "Vous avez terminé l'injection, voici les infos de votre injection:";
       ?> 
      
             <table class = "table table-striped table-bordered">

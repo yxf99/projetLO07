@@ -24,7 +24,7 @@ require ($root . '/app/view/fragment/fragmentVaccinHeader.html');
         <?php
         echo "<label for='patient_id'>patient_id : $results[1]</label>"?>
         <p/>
-        <label for="centre_id">Vous pouvez choisir un centre : </label> 
+        <label for="centre_id">Vous pouvez choisir un centre pour commencer votre vaccination: </label> 
         <select class="form-control" id='centre_id' name='centre_id' style="width: 200px">
             
             <?php

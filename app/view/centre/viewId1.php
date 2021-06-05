@@ -9,11 +9,6 @@ require ($root . '/app/view/fragment/fragmentVaccinHeader.html');
       <?php
       include $root . '/app/view/fragment/fragmentVaccinMenu.html';
       include $root . '/app/view/fragment/fragmentVaccinJumbotron.html';
-       //injection = pas suffit( = 2)
-//      echo $results[2];
-//      //patient_id
-//      echo $results[1];
-      // $results contient un tableau avec la liste des clés.
       ?>
 
         <form role="form" method='get' action='router.php'>      
@@ -28,7 +23,7 @@ require ($root . '/app/view/fragment/fragmentVaccinHeader.html');
             if($results[0] == null){
                 echo'vous pouvez pas vacciner maintenant';
             } else {?>
-               <label for="centre_id">vous pouvez choisir un centre_id : </label> 
+               <label for="centre_id">vous pouvez choisir un centre_id pour compléter votre vaccination : </label> 
              <select class="form-control" id='centre_id' name='centre_id' style="width: 200px">  
               <?php for ($i = 0; $i < count($results[0]); $i++) {
                echo ("<option value=" .  $results[0][$i]['id'] . ">". $results[0][$i]['id'] .":". $results[0][$i]['label'] . "</option>") ;
