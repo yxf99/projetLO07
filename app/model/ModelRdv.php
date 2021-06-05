@@ -69,8 +69,11 @@ class ModelRdv {
    $statement->execute([
      'patient_id' => $patient_id
    ]);
-   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelRdv");
-   return $results;
+//   $results = $statement->fetchAll(PDO::FETCH_CLASS, "ModelRdv");
+//   return $results;
+   
+   $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+   return array($results);
   } catch (PDOException $e) {
    printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
    return NULL;
@@ -93,6 +96,7 @@ class ModelRdv {
  
   public static function distributionVaccin($patient_id) {
      try {
+         //0/1/2
    $database = Model::getInstance();
    $query = "select injection from rendezvous where patient_id = :patient_id ";
    $statement = $database->prepare($query);
@@ -100,29 +104,31 @@ class ModelRdv {
      'patient_id' => $patient_id
    ]);
    $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+//   $results = array($result);
    
    //nombre maximum du vaccin 
+   
    $query1 = "select doses from vaccin, rendezvous where vaccin.id = rendezvous.vaccin_id and rendezvous.patient_id = :patient_id";
    $statement1 = $database->prepare($query1);
    $statement1->execute([
      'patient_id' => $patient_id
    ]);
-   $dosesMax = $statement->fetchAll(PDO::FETCH_ASSOC);
+   $dosesMax = $statement1->fetchAll(PDO::FETCH_ASSOC);
    
-   if($results[0]['injection'] == 0){
+   if($results[0]["injection"] == 0){
         $query = "select distinct id, label from centre, stock where centre.id = stock.centre_id and quantite > 0  ";
         $statement = $database->prepare($query);
         $statement->execute();
         $centrePossible0 = $statement->fetchAll(PDO::FETCH_ASSOC);
         return array($centrePossible0,$patient_id,0);
-   } elseif ($results[0]['injection'] == $dosesMax) {
+   } elseif ($results[0]["injection"] == $dosesMax[0]["doses"]) {
         $query = "select id, label, doses, centre_id, injection from vaccin, rendezvous where vaccin.id = rendezvous.vaccin_id and rendezvous.patient_id = :patient_id";
         $statement = $database->prepare($query);
         $statement->execute([
             'patient_id' => $patient_id
           ]);
         $listeFinale = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return array($listeFinale,2);
+        return array($listeFinale,$patient_id,2);
    } else {// pas suffit
         $query = "select distinct id, label from centre, rendezvous, stock where centre.id = stock.centre_id and rendezvous.vaccin_id = stock.vaccin_id and rendezvous.patient_id = :patient_id and quantite > 0  ";
         $statement = $database->prepare($query);
@@ -148,14 +154,16 @@ class ModelRdv {
         $statement->execute([
             'centre_id' => $centreChoisi
           ]);
-        $quantiteMax = $statement->fetchAll(PDO::FETCH_ASSOC);       
+        $quantiteMax = $statement->fetchAll(PDO::FETCH_ASSOC);  
+        
         //select le label du vaccin ayant la quantite max(vue)
         $query2 = "select distinct id, label from vaccin, stock where vaccin.id = stock.vaccin_id and quantite= :quantite  ";
         $statement2 = $database->prepare($query2);
         $statement2->execute([
-            'quantite' => $quantiteMax[0]['quantite']
+            'quantite' => $quantiteMax[0]["quantite"]
           ]);
-        $vaccin = $statement2->fetchAll(PDO::FETCH_ASSOC);    
+        $vaccin = $statement2->fetchAll(PDO::FETCH_ASSOC); 
+        
         //mettre à jour le vaccin
         $query3 = "update stock set quantite= quantite-1 where centre_id = :centre_id and vaccin_id = :vaccin_id ";
         $statement3 = $database->prepare($query3);
@@ -234,38 +242,6 @@ public static function update($centreId, $patientId, $injection, $vaccin_id) {
   }
  }
 }
-
-class ModelRdvGlobal {
- private $label, $global;
-
- // pas possible d'avoir 2 constructeurs
- public function __construct($label = NULL, $global = NULL) {
-  // valeurs nulles si pas de passage de parametres
-     
-  if (!is_null($label)) {
-   $this->label = $label;
-   $this->global = $global;
-  }
- }
- function setLable ($label) {
-  $this->label = $label;
- }
-
- function setGlobal($global) {
-  $this->global = $global;
- }
-
- function getLabel() {
-  return $this->label;
- }
-
- function getGlobal() {
-  return $this->global;
- } 
-
- 
-}
-
 
 
 
