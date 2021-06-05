@@ -10,15 +10,16 @@ require ($root . '/app/view/fragment/fragmentVaccinHeader.html');
       include $root . '/app/view/fragment/fragmentVaccinMenu.html';
       include $root . '/app/view/fragment/fragmentVaccinJumbotron.html';
       //injection = 0
-      echo $results[2];
-      //patient_id
-      echo $results[1];
+//      echo $results[2];
+//      //patient_id
+//      echo $results[1];
    
       // $results contient un tableau avec la liste des clés.
       ?>
 
         <form role="form" method='get' action='router.php'>
         <input type="hidden" name='action' value='rdvVaccin0'>
+        <input type="hidden" id="patient_id" name="patient_id" value='<?php echo $results[1]?>'>
         <div class="form-group">
         <?php
         echo "<label for='patient_id'>patient_id : $results[1]</label>"?>

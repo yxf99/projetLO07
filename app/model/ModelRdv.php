@@ -104,7 +104,6 @@ class ModelRdv {
      'patient_id' => $patient_id
    ]);
    $results = $statement->fetchAll(PDO::FETCH_ASSOC);
-//   $results = array($result);
    
    //nombre maximum du vaccin 
    
@@ -160,7 +159,7 @@ class ModelRdv {
         $query2 = "select distinct id, label from vaccin, stock where vaccin.id = stock.vaccin_id and quantite= :quantite  ";
         $statement2 = $database->prepare($query2);
         $statement2->execute([
-            'quantite' => $quantiteMax[0]["quantite"]
+            'quantite' => $quantiteMax[0]["max(quantite)"]
           ]);
         $vaccin = $statement2->fetchAll(PDO::FETCH_ASSOC); 
         
@@ -171,12 +170,14 @@ class ModelRdv {
             'centre_id' => $centreChoisi,
             'vaccin_id'=> $vaccin[0]['id']
           ]);  
+        
         //mettre à jour le patient
-        $query4 = "update rendezvous set injection= injection+1 where patient_id = :patient_id ";
+        $query4 = "update rendezvous set injection = injection + 1 where patient_id = :patient_id ";
         $statement4 = $database->prepare($query4);
         $statement4->execute([
             'patient_id' => $patient_id,
           ]);
+        
         return $vaccin;
   } catch (PDOException $e) {
    printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
@@ -189,7 +190,7 @@ class ModelRdv {
         $database = Model::getInstance();
         
         //select le vaccin déjà injecté 
-        $query = "select vaccin_id from rendezvous where patient_id = :patient_id  ";
+        $query = "select distinct id, label from vaccin, rendezvous where vaccin.id = rendezvous.vaccin_id and patient_id = :patient_id  ";
         $statement = $database->prepare($query);
         $statement->execute([
             'patient_id' => $patient_id
@@ -211,31 +212,6 @@ class ModelRdv {
             'patient_id' => $patient_id,
           ]);
         return $vaccin;
-  } catch (PDOException $e) {
-   printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
-   return NULL;
-  }
- }
-public static function update($centreId, $patientId, $injection, $vaccin_id) {
-     try {
-        $database = Model::getInstance();
-        $query = "select * from stock where patient_id = :patientn_id and centre_id= :centre_id";
-        $testExistence = $database->prepare($query);
-            $testExistence->execute([
-                'patient_id' => $patientId,
-                'centre_id' => $centreId,
-            ]);
-            if ($testExistence->rowCount() == 0) {
-                return null;
-            } else {
-        $query = "update stock set injection = injection + :injection where patient_id = :patient_id and centre_id= :centre_id";
-        $statement = $database->prepare($query);
-        $statement->execute([
-          'patient_id' => $patientId,
-          'centre_id' => $centreId,
-          'injection' => $injection
-        ]);
-            return $centreId;}
   } catch (PDOException $e) {
    printf("%s - %s<p/>\n", $e->getCode(), $e->getMessage());
    return NULL;

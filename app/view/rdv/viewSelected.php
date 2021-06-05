@@ -10,7 +10,7 @@ require ($root . '/app/view/fragment/fragmentVaccinHeader.html');
     include $root . '/app/view/fragment/fragmentVaccinMenu.html';
     include $root . '/app/view/fragment/fragmentVaccinJumbotron.html';
     
-    var_dump($results[0]);
+//    var_dump($results[0]);
 
     ?>
       

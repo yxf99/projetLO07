@@ -18,7 +18,7 @@ require ($root . '/app/view/fragment/fragmentVaccinHeader.html');
      echo ("<li>" . $results[0]['label'] . "</li>");
      echo("</ul>");
     } else {
-     echo ("<h3>Problème du vaccin 00</h3>");
+     echo ("<h3>Problème du vaccin</h3>");
      echo ("label = " . $results[0]['label']);
     }
 

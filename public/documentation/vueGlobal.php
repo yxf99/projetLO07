@@ -21,6 +21,10 @@ require ($root . '/app/view/fragment/fragmentVaccinHeader.html');
           On a bien réfléchier de créer les nouvelles classes et de modifier les requêtes sql(somme,update,delete...) aussi créer des nouveaux méthodes
           afin de faciliter notre processus.
       </p>
+      <p>Pour les rendezvous, j'ai séparé les 3 vues dans les 3 cas, mais je pense qu'il est mieux de les écrire dans unz même vue. Ce qui 
+          est difficile, c'est le logique et comment diffuser les vaccins avec les reqûetes sql. Il faut séparer les cas différents en utilisant
+          if/else et c'est important de manipuler le <br> fetch </br>, particulièrement quand on recupère un array avec ASSOC.
+      </p>
       <p>A propos d'amélioration, je pense qu'il est mieux d'insérer les bouton d'ajouter ou supprimer dans la page de la liste pour 
           en faveur des utilisateurs sans besoins de chercher les entrées dans la barre.
       </p>
